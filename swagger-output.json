@@ -11,6 +11,283 @@
     "http"
   ],
   "paths": {
+    
+    "/api/note": {
+      "get": {
+        "tags": [
+          "Note"
+        ],
+        "description": "Obtiene una nota",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+        "post": {
+          "tags": [
+            "Note"
+          ],
+          "description": "Crea una nota",
+          "parameters": [
+            {
+              "name": "content",
+              "type": "string",
+              "required": true,
+              "in":"body"
+            },
+            {
+              "name": "user",
+              "type": "string",
+              "required": true,
+              "in": "body"
+            },
+            {
+              "name": "task",
+              "type": "string",
+              "required": true,
+              "in": "body"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Nota creada"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+      }
+    },
+    "/api/note/{id}":{
+      "get": {
+        "tags": [
+          "Note"
+        ],
+        "description": "Obtiene una nota por su id.",
+        "parameters": [
+          {
+            "name":"params",
+            "type":"string",
+            "in":"header",
+            "required":true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Note"
+        ],
+        "description": "Edita una nota.",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "string",
+            "in": "path",
+            "required":true
+          },
+          {
+            "name": "content",
+            "type": "string",
+            "in": "body",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Editado"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Note"
+        ],
+        "description": "Elimina una nota",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "string",
+            "required": true,
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Nota eliminada"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+
+
+
+    "/api/task": {
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "description": "Obtiene las tareas",
+        "parameters": [
+          {
+            "name": "params",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Task"
+        ],
+        "description": "Crea una tarea",
+        "parameters": [
+          {
+            "name": "name",
+            "required": true,
+            "type": "string",
+            "in": "body"
+          },
+          {
+            "name": "description",
+            "required": true,
+            "type": "string",
+            "in": "body"
+          },
+          {
+            "name": "resume",
+            "required": true,
+            "type": "string",
+            "in": "body"
+          },
+          {
+            "name": "user",
+            "required": true,
+            "type":"string",
+            "in":"body"
+          }
+        ],
+        "responses": {
+          "201": {"description": "Tarea creada"},
+          "500": {"description": "Internal Server Error"}
+        }
+      }
+    },
+    "/api/task/{id}": {
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "description": "Obtiene una tarea por su ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Task"
+        ],
+        "description": "Modifica una tarea",
+        "parameters": [
+          {
+            "name": "name",
+            "type": "string",
+            "in": "body"
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "in": "body"
+          },
+          {
+            "name": "resume",
+            "type": "string",
+            "in": "body"
+          },
+          {
+            "name": "user",
+            "type":"string",
+            "in":"body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description":"OK"
+          },
+          "500": {
+            "description":"Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Task"
+        ],
+        "description": "Elimina una tarea",
+        "parameters": {
+          "name": "id",
+          "required": true,
+          "type":"string",
+          "in": "path"
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+
+
+
     "/api/user": {
       "get": {
         "tags": [
@@ -37,7 +314,57 @@
         "tags": [
           "Usuario"
         ],
-        "description": "",
+        "description": "Crea un usuario",
+        "parameters": [
+          {
+            "name": "firtname",
+            "type": "string",
+            "required": true,
+            "in": "body"
+          },
+          {
+            "name": "lastname",
+            "type": "string",
+            "required": true,
+            "in": "body"
+          },
+          {
+            "name": "email",
+            "type": "string",
+            "required": true,
+            "in": "body"
+          },
+          {
+            "name": "domicilio",
+            "type": "string",
+            "required": true,
+            "in": "body"
+          },
+          {
+            "name": "celular",
+            "type": "string",
+            "required": true,
+            "in": "body"
+          },
+          {
+            "name": "documento",
+            "type": "string",
+            "required": true,
+            "in": "body"
+          },
+          {
+            "name": "rol",
+            "type": "string",
+            "required": true,
+            "in": "body"
+          },
+          {
+            "name": "area",
+            "type": "string",
+            "required": true,
+            "in": "body"
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -80,9 +407,48 @@
           {
             "name": "id",
             "in": "path",
-            "required": true,
             "type": "string"
-          }
+          },
+          {
+            "name": "firtname",
+            "type": "string",
+            "in": "body"
+          },
+          {
+            "name": "lastname",
+            "type": "string",
+            "in": "body"
+          },
+          {
+            "name": "email",
+            "type": "string",
+            "in": "body"
+          },
+          {
+            "name": "domicilio",
+            "type": "string",
+            "in": "body"
+          },
+          {
+            "name": "celular",
+            "type": "string",
+            "in": "body"
+          },
+          {
+            "name": "documento",
+            "type": "string",
+            "in": "body"
+          },
+          {
+            "name": "rol",
+            "type": "string",
+            "in": "body"
+          },
+          {
+            "name": "area",
+            "type": "string",
+            "in": "body"
+          }          
         ],
         "responses": {
           "200": {
