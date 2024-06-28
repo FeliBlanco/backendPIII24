@@ -18,6 +18,7 @@ async function paginated(params) {
       .skip(perPage * page)
       .sort(sort)
       .populate('user')
+      .populate('task')
       .exec();
   
     return pager.createPager(page,data,count,perPage)
